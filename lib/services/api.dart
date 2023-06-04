@@ -13,10 +13,11 @@ class WeatherDataApi {
     // check if city & zip both are not empty
     if (cityOrZipCode != "") {
       final url =
-          "https://api.openweathermap.org/data/2.5/forecast?q=$cityOrZipCode&appid=$key";
+          "https://api.openweathermap.org/data/2.5/forecast?q=$cityOrZipCode&appid=$key&units=metric";
 
       final response =
           await http.get(Uri.parse(url)); // getting response from api
+      print("api hit");
 
       if (response.statusCode == 200) {
         final data = weatherDataFromJson(response.body);
