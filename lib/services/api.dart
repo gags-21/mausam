@@ -25,7 +25,7 @@ class WeatherDataApi {
       }
       throw ("${response.reasonPhrase}");
     } else {
-      throw ("Both City and Zip are empty");
+      throw ("Please enter a valid city or zip code");
     }
   }
 }
