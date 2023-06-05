@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hover_widget/hover_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/provider/weather_provider.dart';
 import 'package:weather_app/screen/weather_info.dart';
-import 'package:weather_app/services/api.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -40,51 +40,54 @@ class Home extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  weatherProvider
-                      .setWeatherDetails(cityOriZipCode: searchController.text)
-                      .then(
-                        (v) => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const WeatherInfoScreen(),
+              ButtonFeedback(
+                child: ElevatedButton(
+                  onPressed: () {
+                    weatherProvider
+                        .setWeatherDetails(
+                            cityOriZipCode: searchController.text)
+                        .then(
+                          (v) => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const WeatherInfoScreen(),
+                            ),
                           ),
+                        )
+                        .catchError((error) {
+                      String error = weatherProvider.errorMsg ==
+                              "Both City and Zip are empty"
+                          ? "Insufficient data"
+                          : "Somthing went wrong";
+                      String errorMsg = weatherProvider.errorMsg;
+                      return showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(error),
+                          content: Text(errorMsg),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text("OK"),
+                            ),
+                          ],
                         ),
-                      )
-                      .catchError((error) {
-                    String error = weatherProvider.errorMsg ==
-                            "Both City and Zip are empty"
-                        ? "Insufficient data"
-                        : "Somthing went wrong";
-                    String errorMsg = weatherProvider.errorMsg;
-                    return showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: Text(error),
-                        content: Text(errorMsg),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text("OK"),
+                      );
+                    });
+                  },
+                  style: ButtonStyle(
+                    fixedSize: MaterialStateProperty.all(const Size(160, 40)),
+                  ),
+                  child: weatherProvider.isLoading
+                      ? const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: FittedBox(
+                            fit: BoxFit.contain,
+                            child: CircularProgressIndicator(),
                           ),
-                        ],
-                      ),
-                    );
-                  });
-                },
-                style: ButtonStyle(
-                  fixedSize: MaterialStateProperty.all(const Size(150, 30)),
+                        )
+                      : const Text("Search"),
                 ),
-                child: weatherProvider.isLoading
-                    ? const Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: FittedBox(
-                          fit: BoxFit.contain,
-                          child: CircularProgressIndicator(),
-                        ),
-                      )
-                    : const Text("Search"),
               ),
             ],
           ),
