@@ -23,13 +23,11 @@ The fetched data will show the following features regarding the weather:
 
 ## Previews
 
-<img width="1373" alt="Screenshot 2023-06-05 at 10 31 56 PM" src="https://github.com/gags-21/mausam/assets/61724325/03b064ca-2fa6-469d-87ca-4b829e602cd7">
+<img width="1373" alt="Screenshot 2023-06-05 at 10 31 56 PM" src="https://github.com/gags-21/mausam/assets/61724325/a420cf31-e237-4fdd-a2ed-e15da4d55fed">
 Landing Page
 
-<img width="1373" alt="Screenshot 2023-06-05 at 10 31 41 PM" src="https://github.com/gags-21/mausam/assets/61724325/93778fcf-ece4-4a40-84ac-e34f95bca627">
+<img width="1373" alt="Screenshot 2023-06-05 at 10 31 41 PM" src="https://github.com/gags-21/mausam/assets/61724325/5aa680e0-423d-49d2-925a-fdf5e7152711">
 Weather Information screen
 
-
-https://github.com/gags-21/mausam/assets/61724325/cd530879-1b41-4473-a92b-a8149b4ccd33
-
+https://github.com/gags-21/mausam/assets/61724325/67ac7ebe-3407-4f4f-9109-127fd5d4f54e
 Quick Preview
