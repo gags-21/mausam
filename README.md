@@ -30,4 +30,5 @@ Landing Page
 Weather Information screen
 
 https://github.com/gags-21/mausam/assets/61724325/67ac7ebe-3407-4f4f-9109-127fd5d4f54e
+
 Quick Preview
