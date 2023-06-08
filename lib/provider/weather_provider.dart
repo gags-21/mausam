@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/services/api.dart';
+import 'package:weather_app/utils/weather_data.dart';
 
 class WeatherProvider extends ChangeNotifier {
   final weatherApi = WeatherDataApi();
@@ -7,12 +8,12 @@ class WeatherProvider extends ChangeNotifier {
   bool _isLoading = false;
 
   String _city = "";
-  List _listOfWeatherInfo = [];
+  List<WeatherInfo> _listOfWeatherInfo = [];
   String _errorMessage = "";
 
   bool get isLoading => _isLoading;
   String get city => _city;
-  List get listOfWeatherInfo => _listOfWeatherInfo;
+  List<WeatherInfo> get listOfWeatherInfo => _listOfWeatherInfo;
   String get errorMsg => _errorMessage;
 
   Future<void> setWeatherDetails({
@@ -26,8 +27,8 @@ class WeatherProvider extends ChangeNotifier {
         .getWeatherData(cityOrZipCode: cityOriZipCode)
         .then((value) {
       _isLoading = false;
-      _city = value["city"]["name"];
-      _listOfWeatherInfo = value["list"];
+      _city = value.cityName;
+      _listOfWeatherInfo = value.weatherInfo;
       notifyListeners();
     }).catchError((error) {
       _isLoading = false;

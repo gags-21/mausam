@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:weather_app/utils/api_key.dart';
+import 'package:weather_app/utils/weather_data.dart';
 
 class WeatherDataApi {
   // getting weather info from api
-  Future<Map> getWeatherData({
+  Future<WeatherData> getWeatherData({
     required String cityOrZipCode,
   }) async {
     // key
@@ -21,7 +22,7 @@ class WeatherDataApi {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        return data;
+        return WeatherData.fromJson(data);
       }
       throw ("${response.reasonPhrase}");
     } else {

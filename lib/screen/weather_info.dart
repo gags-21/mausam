@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/provider/weather_provider.dart';
+import 'package:weather_app/utils/weather_data.dart';
 
 class WeatherInfoScreen extends StatelessWidget {
   const WeatherInfoScreen({super.key});
@@ -46,7 +47,7 @@ class ShowForecast extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List weatherInfo = [];
+    List<WeatherInfo> weatherInfo = [];
     return Consumer<WeatherProvider>(
       builder: (context, weatherProvider, _) {
         final weatherInfoCount = weatherProvider.listOfWeatherInfo.length;
@@ -114,8 +115,7 @@ class ShowForecast extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemCount: 5, // weatherInfo.length,
                             itemBuilder: (context, index) {
-                              final date =
-                                  DateTime.parse(weatherInfo[index]["dt_txt"]);
+                              final date = weatherInfo[index].date;
 
                               return Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -189,7 +189,7 @@ class ShowForecast extends StatelessWidget {
                                               height: 20,
                                             ),
                                             Text(
-                                              "${weatherInfo[index]["weather"][0]["description"]} \n Weather",
+                                              "${weatherInfo[index].weatherType} \n Weather",
                                               textAlign: TextAlign.center,
                                               overflow: TextOverflow.ellipsis,
                                               style: const TextStyle(
@@ -201,7 +201,7 @@ class ShowForecast extends StatelessWidget {
                                               height: 20,
                                             ),
                                             Text(
-                                              "${weatherInfo[index]["main"]["temp"]}\u00B0",
+                                              "${weatherInfo[index].temp}\u00B0",
                                               style: const TextStyle(
                                                   fontSize: 30,
                                                   fontWeight: FontWeight.bold),
@@ -210,7 +210,7 @@ class ShowForecast extends StatelessWidget {
                                               height: 10,
                                             ),
                                             Text(
-                                              "Feels like \n ${weatherInfo[index]["main"]["feels_like"]}\u00B0",
+                                              "Feels like \n ${weatherInfo[index].feelsLike}\u00B0",
                                               textAlign: TextAlign.center,
                                               style: const TextStyle(
                                                 fontSize: 10,
@@ -234,7 +234,9 @@ class ShowForecast extends StatelessWidget {
                                                 size: 15,
                                               ),
                                               Text(
-                                                "${weatherInfo[index]["wind"]["speed"]}",
+                                                weatherInfo[index]
+                                                    .windSpeed
+                                                    .toString(),
                                                 style: const TextStyle(
                                                   fontSize: 10,
                                                   fontWeight: FontWeight.w100,
@@ -248,7 +250,9 @@ class ShowForecast extends StatelessWidget {
                                                 size: 15,
                                               ),
                                               Text(
-                                                "${weatherInfo[index]["main"]["humidity"]}",
+                                                weatherInfo[index]
+                                                    .humidity
+                                                    .toString(),
                                                 style: const TextStyle(
                                                   fontSize: 10,
                                                   fontWeight: FontWeight.w100,
